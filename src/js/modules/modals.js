@@ -6,7 +6,7 @@ const modals = () => {
 
         trigger.forEach(item => {
             item.addEventListener('click', (e) => {
-                if (e.target) {
+                if (e.target) { // проверка что этот элемент действительно существует
                     e.preventDefault();
                 }
     
@@ -34,7 +34,8 @@ const modals = () => {
     function showModalByTime(selector, time) {
         setTimeout(function() {
             document.querySelector(selector).style.display = 'block';
-            document.body.style.overflow = "hidden";
+            document.body.classList.add('modal-open');
+            // document.body.style.overflow = "hidden";
         }, time);
     }
         
