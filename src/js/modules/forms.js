@@ -7,7 +7,7 @@ const forms = () => {
         item.addEventListener('input', () => {
             item.value = item.value.replace(/\D/, ''); // все нечисловые значения заменяем пустой строкой
         });
-    })
+    });
 
     const message = {
         loading: 'Загрузка...',
@@ -15,7 +15,7 @@ const forms = () => {
         failuer: 'Помилка...'
     };
 
-    const postData = async (url, data) => { // url и data нужны для щапуска fetch
+    const postData = async (url, data) => { // url и data нужны для запуска fetch
         document.querySelector('.status').textContent = message.loading;
         let res = await fetch(url, {       //перед асинхронной опирацией await
             method: "POST",
