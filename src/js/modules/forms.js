@@ -1,13 +1,10 @@
-const forms = () => {
+import checkNumInputs from "./checkNumInputs";
+
+const forms = (state) => {
     const form = document.querySelectorAll('form'),
-          inputs = document.querySelectorAll('input'),
-          phoneInputs = document.querySelectorAll('input[name="user_phone"]');
+          inputs = document.querySelectorAll('input');
         
-    phoneInputs.forEach(item => {
-        item.addEventListener('input', () => {
-            item.value = item.value.replace(/\D/, ''); // все нечисловые значения заменяем пустой строкой
-        });
-    });
+    checkNumInputs('input[name="user_phone"]');
 
     const message = {
         loading: 'Загрузка...',
@@ -39,9 +36,14 @@ const forms = () => {
             statusMessage.classList.add('status');
             item.appendChild(statusMessage);
 
-            const formData = new FormData(item); // конструктор. этот объект найдет все инпуты, соберет все эти данные в одну структуру и эта структура будет в formData
+            const formData = new FormData(item); // formData собирает все данные. Это все данные, которые есть у нас в форме (с инпутов и др)
+            if(item.getAttribute('data-calc') === "end") {
+                for (let key in state) { // перебираем данные из state и отправляем их в formData
+                    formData.append(key, state[key]);
+                }
+            }
 
-            postData('assets/server.php', formData)
+            postData('assets/server.php', formData) // отправляем нашу форму с данными
                 .then(res => {
                     console.log(res);
                     statusMessage.textContent = message.success;
@@ -49,7 +51,7 @@ const forms = () => {
                 .catch(() => statusMessage.textContent = message.failuer)
                 .finally(() => {
                     clearInputs();
-                    setTimeout(() => {         // через какое время удалиться сообщение
+                    setTimeout(() => {         // - через какое время удалиться сообщение
                         statusMessage.remove();
                     }, 5000);
                 });
