@@ -37,7 +37,6 @@ const tabs = (headerSelector, tabSelector, contentSelector, activeClass, display
                 }
             })
         }
-
     })
 };
 

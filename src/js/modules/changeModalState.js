@@ -15,12 +15,6 @@ const changeModalState = (state) => {
     function bindActionToElems (event, elem, prop) {
         elem.forEach((item, i) => {
             item.addEventListener(event, () => {
-                // if (elem.length > 1) {
-                //     state[prop] = i; // запишем номер изображения, которое выбрал пользователь
-                // } else {
-                //     state[prop] = item.value;
-                // }
-                // console.log(state);
                 switch(item.nodeName) {
                     case 'SPAN' :
                         state[prop] = i;
@@ -45,6 +39,7 @@ const changeModalState = (state) => {
                 }
 
                 console.log(state);
+
             });
         });
     }
