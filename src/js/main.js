@@ -3,11 +3,13 @@ import modals from "./modules/modals";
 import tabs from "./modules/tabs";
 import forms from "./modules/forms";
 import changeModalState from "./modules/changeModalState";
+import timer from "./modules/timer";
 
 window.addEventListener('DOMContentLoaded', () => {
     "use strict";
 
     let modalState = {}; // - состояние модального окна, где пользователь что-то выбирает
+    let deadline = '2024-08-01'
 
     changeModalState(modalState); // - постоянно модифицируем объект modalState
     modals();
@@ -15,4 +17,5 @@ window.addEventListener('DOMContentLoaded', () => {
     tabs('.decoration_slider', '.no_click', '.decoration_content > div > div', 'after_click'); // заинициализируем все табы
     tabs('.balcon_icons', '.balcon_icons_img', '.big_img > img', '.do_image_more', 'inline-block');
     forms(modalState);
+    timer('.container1', deadline);
 });
