@@ -102,7 +102,8 @@ __webpack_require__.r(__webpack_exports__);
 
 const forms = state => {
   const form = document.querySelectorAll('form'),
-    inputs = document.querySelectorAll('input');
+    inputs = document.querySelectorAll('input'),
+    popup = document.querySelector('.popup_engineer');
   (0,_checkNumInputs__WEBPACK_IMPORTED_MODULE_0__["default"])('input[name="user_phone"]');
   const message = {
     loading: 'Загрузка...',
@@ -148,6 +149,7 @@ const forms = state => {
         setTimeout(() => {
           // - через какое время удалиться сообщение
           statusMessage.remove();
+          // popup.style.display = 'none'; // закрываю модальное окно после заполнения и отправки данных
         }, 5000);
       });
     });
@@ -212,7 +214,8 @@ const modals = () => {
     const trigger = document.querySelectorAll(triggerSelector),
       modal = document.querySelector(modalSelector),
       close = document.querySelector(closeSelector),
-      windows = document.querySelectorAll('[data-modal]');
+      windows = document.querySelectorAll('[data-modal]'),
+      scroll = calcScroll();
     trigger.forEach(item => {
       item.addEventListener('click', e => {
         if (e.target) {
@@ -226,6 +229,7 @@ const modals = () => {
         modal.style.display = "block";
         //document.body.classList.add('modal-open');
         document.body.style.overflow = "hidden";
+        document.body.style.marginRight = `${scroll}px`;
         console.log('Modal opened:', modalSelector);
       });
     });
@@ -236,6 +240,7 @@ const modals = () => {
       modal.style.display = "none";
       //document.body.classList.remove('modal-open');
       document.body.style.overflow = "";
+      document.body.style.marginRight = `0px`;
     });
     modal.addEventListener('click', e => {
       if (e.target === modal && closeClickOverlay) {
@@ -246,6 +251,7 @@ const modals = () => {
         modal.style.display = "none";
         //document.body.classList.remove('modal-open');
         document.body.style.overflow = "";
+        document.body.style.marginRight = `0px`;
       }
     });
   }
@@ -255,6 +261,17 @@ const modals = () => {
       document.body.classList.add('modal-open');
       // document.body.style.overflow = "hidden";
     }, time);
+  }
+  function calcScroll() {
+    let div = document.createElement('div');
+    div.style.width = '50px';
+    div.style.height = '50px';
+    div.style.overflowY = 'scroll';
+    div.style.visibility = 'hidden';
+    document.body.appendChild(div);
+    let scrollWidth = div.offsetWidth - div.clientWidth;
+    div.remove();
+    return scrollWidth;
   }
   bindModal('.popup_engineer_btn', '.popup_engineer', '.popup_engineer .popup_close');
   bindModal('.phone_link', '.popup', '.popup .popup_close');
@@ -14310,8 +14327,8 @@ __webpack_require__.r(__webpack_exports__);
 window.addEventListener('DOMContentLoaded', () => {
   "use strict";
 
-  let modalState = {}; // - состояние модального окна, где пользователь что-то выбирает
-  let deadline = '2024-08-01';
+  let modalState = {}; // - состояние модального окна, где пользователь что-то выбирает. глобальный стейт
+  let deadline = '2024-08-31';
   (0,_modules_changeModalState__WEBPACK_IMPORTED_MODULE_4__["default"])(modalState); // - постоянно модифицируем объект modalState
   (0,_modules_modals__WEBPACK_IMPORTED_MODULE_1__["default"])();
   (0,_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.glazing_slider', '.glazing_block', '.glazing_content', '.active');

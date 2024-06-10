@@ -2,7 +2,8 @@ import checkNumInputs from "./checkNumInputs";
 
 const forms = (state) => {
     const form = document.querySelectorAll('form'),
-          inputs = document.querySelectorAll('input');
+          inputs = document.querySelectorAll('input'),
+          popup = document.querySelector('.popup_engineer');
         
     checkNumInputs('input[name="user_phone"]');
 
@@ -53,6 +54,7 @@ const forms = (state) => {
                     clearInputs();
                     setTimeout(() => {         // - через какое время удалиться сообщение
                         statusMessage.remove();
+                        // popup.style.display = 'none'; // закрываю модальное окно после заполнения и отправки данных
                     }, 5000);
                 });
         });

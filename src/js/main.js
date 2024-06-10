@@ -9,8 +9,8 @@ import images from "./modules/images";
 window.addEventListener('DOMContentLoaded', () => {
     "use strict";
 
-    let modalState = {}; // - состояние модального окна, где пользователь что-то выбирает
-    let deadline = '2024-08-01'
+    let modalState = {}; // - состояние модального окна, где пользователь что-то выбирает. глобальный стейт
+    let deadline = '2024-08-31'
 
     changeModalState(modalState); // - постоянно модифицируем объект modalState
     modals();
