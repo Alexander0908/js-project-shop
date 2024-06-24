@@ -7,7 +7,7 @@ const changeModalState = (state) => {
           windowType = document.querySelectorAll('#view_type'),
           windowProfile = document.querySelectorAll('.checkbox');
 
-    checkNumInputs('#width'); //валидируем ширину
+    checkNumInputs('#width'); // валидируем ширину
     checkNumInputs('#height'); // и высоту
 
     //функция, которая на определенный element навязывает определенный обработчик события event 
